@@ -5,7 +5,7 @@ from app.services.qualification import qualify_lead
 
 app = FastAPI(
     title="AI Lead Qualification API",
-    version="0.1.0",
+    version="0.2.0",
 )
 
 
