@@ -2,6 +2,31 @@
 
 A deterministic and auditable lead-scoring service built with FastAPI, Pydantic, and Python. It converts validated real-estate purchase signals into a score from 0 to 100, a cold/warm/hot classification, and a structured explanation of the result.
 
+## Live API
+
+The API is deployed on Render.
+
+- [Swagger documentation](https://ai-lead-qualification-api.onrender.com/docs)
+- [Health endpoint](https://ai-lead-qualification-api.onrender.com/health)
+
+The free Render instance may sleep after inactivity. The first request after inactivity may take around 50 seconds or more.
+
+### Try it
+
+```bash
+curl -X POST https://ai-lead-qualification-api.onrender.com/api/v1/leads/qualify \
+  -H "Content-Type: application/json" \
+  -d '{
+    "maximum_purchase_budget": 450000,
+    "property_price": 500000,
+    "financing_status": "needs_financing",
+    "purchase_timeframe": "within_3_months",
+    "visit_interest": false
+  }'
+```
+
+The expected classification is `warm`.
+
 ## Why this project exists
 
 Lead qualification is often embedded inside prompts, conversational flows, or application code where its behavior is difficult to test and audit. This project extracts that responsibility into a small, independently testable service with an explicit API contract.
@@ -12,7 +37,7 @@ The design is inspired by a real production real-estate conversational system. I
 - This service validates those fields and applies fixed business rules.
 - Every result can be reproduced and explained from the submitted data.
 
-The repository is an implementation-focused portfolio project. It demonstrates production-oriented boundaries and testing practices, but it does not claim to be deployed to production.
+The repository is an implementation-focused portfolio project. It demonstrates production-oriented boundaries and testing practices and includes a publicly deployed demo.
 
 ## Current capabilities
 
